@@ -13,14 +13,15 @@ runs:
       shell: bash
       run: |
         pushd "${{ inputs.exercise }}"
-        make debug
-        make test
+        make depends
         make release
+        make debug
+        make debug_test
         popd
 
     - name: Модульные тесты
       shell: bash
       run: |
         pushd "${{ inputs.exercise }}"
-        make runtest
+        make run_debug_test
         popd

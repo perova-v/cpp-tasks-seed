@@ -1,7 +1,15 @@
-debug :
+include ../Makefile.inc
 
-release :
+release    : main.r.o library.r.o
+	$(LD) -o $@ $^
 
-test :
+debug      : main.d.o library.d.o
+	$(LD) -o $@ $^
 
-runtest :
+debug_test : test_main.d.o library.d.o
+	$(LD) $(GTEST_LIBS) -o $@ $^
+
+run_debug_test : debug_test
+	./$^
+
+include Makefile.hdrdep
