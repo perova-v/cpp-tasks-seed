@@ -1,0 +1,30 @@
+on: [pull_request, push]
+
+env:
+  # На будущее, отсюда: https://github.com/vkats-spbu/HomeAssignments-spring-demo/blob/main/.github/workflows/cmake-single-platform.yml
+  CMAKE_BUILD_TYPE: RelWithDebInfo
+
+jobs:
+  maketest:
+    runs-on: ubuntu-24.04
+    steps:
+
+    - name: Установка инструментов
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+        build-essential \
+        libgtest-dev \
+        cmake
+
+    - name: Установка Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Получение кода
+      uses: actions/checkout@v4
+
+    - uses: ./.github/actions/make-utest
+      with:
+        exercise: 01.DummyMake

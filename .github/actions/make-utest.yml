@@ -1,0 +1,24 @@
+name: "Make and tests"
+description: "Make, unittest & integration test"
+
+inputs:
+  exercise:
+    type: string
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Сборка
+      run: |
+        pushd "${{ inputs.exercise }}"
+        make debug
+        make test
+        make release
+        popd
+
+    - name: Модульные тесты
+      run: |
+        pushd "${{ inputs.exercise }}"
+        make runtest
+        popd
