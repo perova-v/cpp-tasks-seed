@@ -10,6 +10,7 @@ runs:
   using: "composite"
   steps:
     - name: Сборка
+      shell: bash
       run: |
         pushd "${{ inputs.exercise }}"
         make debug
@@ -18,6 +19,7 @@ runs:
         popd
 
     - name: Модульные тесты
+      shell: bash
       run: |
         pushd "${{ inputs.exercise }}"
         make runtest
