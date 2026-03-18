@@ -16,12 +16,19 @@ runs:
         make depends
         make release
         make debug
-        make debug_test
+        make utest
         popd
 
     - name: Модульные тесты
       shell: bash
       run: |
         pushd "${{ inputs.exercise }}"
-        make run_debug_test
+        make run_utest
+        popd
+
+    - name: Интеграционные тесты
+      shell: bash
+      run: |
+        pushd "${{ inputs.exercise }}"
+        make run_itest
         popd
