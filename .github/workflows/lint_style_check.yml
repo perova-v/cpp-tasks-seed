@@ -30,17 +30,17 @@ jobs:
             - '*.h'
 
     - name: Статический анализ clang-tidy
-        run: |
-          CHECKS='-*,clang-analyzer-*,modernize-*,performance-*,bugprone-*'
-          FILES=$(git ls-files '*.cpp' '*.cxx' '*.cc' | tr '\n' ' ')
+      run: |
+        CHECKS='-*,clang-analyzer-*,modernize-*,performance-*,bugprone-*'
+        FILES=$(git ls-files '*.cpp' '*.cxx' '*.cc' | tr '\n' ' ')
 
-          if [ -z "$FILES" ]; then
-            echo "No source files to analyze."
-            exit 0
-          fi
+        if [ -z "$FILES" ]; then
+          echo "No source files to analyze."
+          exit 0
+        fi
 
-          set -o pipefail
-          for f in $FILES; do
-            echo "Running clang-tidy on $f"
-            clang-tidy -p . -checks="$CHECKS" "$f" --quiet 2>&1 | sed '/^$/d'
-          done
+        set -o pipefail
+        for f in $FILES; do
+          echo "Running clang-tidy on $f"
+          clang-tidy -p . -checks="$CHECKS" "$f" --quiet 2>&1 | sed '/^$/d'
+        done
