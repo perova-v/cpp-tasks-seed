@@ -1,8 +1,8 @@
 # Домашние задания по дисциплине «Алгоритмы и структуры данных»
 
 ## Состояние
-- ![BuildUtestItest](../../actions/workflows/make_and_test.yml/badge.svg) — Make и тесты
-- ![StyleCheck](../../actions/workflows/lint_style_check.yml/badge.svg) — CLang Tidy и форматирование
+- [![BuildUtestItest](../../actions/workflows/make_and_test.yml/badge.svg)](../../actions/workflows/make_and_test.yml) — Make и тесты
+- [![StyleCheck](../../actions/workflows/lint_style_check.yml/badge.svg)](../../actions/workflows/lint_style_check.yml) — CLang Tidy и форматирование
 
 ## Задания
 
