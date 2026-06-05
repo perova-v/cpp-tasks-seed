@@ -1,5 +1,6 @@
 #include <string>
 #include <iomanip>
+#include <vector>
 #include <lazycsv.hpp>
 
 #include "util.h"
@@ -20,7 +21,22 @@ GaussMatrix load_csv_to_matrix(const char *filename)
         }
     }
 
-    return GaussMatrix(rcsv.size(), rcsv.begin()->size());
+    if (rcsv.empty()) {
+        return GaussMatrix(0, 0);
+    }
+
+    int rows = rcsv.size();
+    int cols = rcsv[0].size();
+    GaussMatrix matrix(rows, cols);
+    for (int i = 0; i < rows; ++i)
+    {
+        for (int j = 0; j < cols; ++j)
+        {
+            matrix(i, j) = rcsv[i][j];
+        }
+    }
+
+    return matrix;
 }
 
 void print_matrix_as_csv(std::ostream& out, const GaussMatrix &matrix, int prec)
