@@ -26,8 +26,10 @@ const std::vector<std::pair<const char *, const char * >> string_cases =
     { "NM&qnZ!92pZ*pv8Ap", "Hello, world!" },
     { "LSb`dI5i+?b0BVSbRc43b7eL(E&", "Base85 is not base64." },
     { "FflSSG&MFiI5}ZrV`OD!", "0123456789abcdef" },
-    { "RA^-&adl~9Yan8BZ+C7WW^Z^PYISXJb0BYaWpW^NXk{R5VS0HWWN&8",
-      "The quick brown fox jumps over the lazy dog" }
+    {
+        "RA^-&adl~9Yan8BZ+C7WW^Z^PYISXJb0BYaWpW^NXk{R5VS0HWWN&8",
+        "The quick brown fox jumps over the lazy dog"
+    }
 };
 
 static std::vector<uint8_t> cstr2v(const char *s)
@@ -84,10 +86,12 @@ TEST(Base85Binary, KnownBinaryEncodes)
         { { 0, 0, 0, 0 }, "00000" },
         { { 0, 0, 0, 1 }, "00001" },
         { { 255, 255, 255, 255 }, "|NsC0" },
-        { { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },
-          "009C61O)~M2nh-c3=Iws" },
-        { { 0, 1, 2, 3, 250, 251, 252, 253, 254, 255 },
-          "009C6`uqI-{{H" }
+        {   { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },
+            "009C61O)~M2nh-c3=Iws"
+        },
+        {   { 0, 1, 2, 3, 250, 251, 252, 253, 254, 255 },
+            "009C6`uqI-{{H"
+        }
     };
 
     for (const auto &p : cases)
@@ -127,7 +131,7 @@ TEST(Base85RoundTrip, AllBytePrefixes)
 
 TEST(Base85Decode, PaddingLikePython)
 {
-    EXPECT_EQ(base85::decode(cstr2v("0")), std::vector<uint8_t>{});
+    EXPECT_EQ(base85::decode(cstr2v("0")), std::vector<uint8_t> {});
     EXPECT_EQ(base85::decode(cstr2v("00")), std::vector<uint8_t>({ 0 }));
     EXPECT_EQ(base85::decode(cstr2v("000")), std::vector<uint8_t>({ 0, 0 }));
     EXPECT_EQ(base85::decode(cstr2v("0000")), std::vector<uint8_t>({ 0, 0, 0 }));
