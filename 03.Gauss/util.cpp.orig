@@ -21,8 +21,7 @@ GaussMatrix load_csv_to_matrix(const char *filename)
         }
     }
 
-    if (rcsv.empty())
-    {
+    if (rcsv.empty()) {
         return GaussMatrix(0, 0);
     }
 
